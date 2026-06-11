@@ -96,7 +96,7 @@ Before deploying this function, ensure you have:
    - **Runtime:** Python 3.11 (or 3.8+)
    - **Architecture:** x86_64
 5. Click **Create Function**
-6. In the **Code** tab, paste the contents of `s3-lambda-function.py`
+6. In the **Code** tab, paste the contents of `stale-ebs-snapshots.py`
 7. Click **Deploy**
 8. Set the **timeout** to at least **5 minutes** under Configuration → General Configuration
    (large accounts with many snapshots may take longer)
@@ -108,7 +108,7 @@ Before deploying this function, ensure you have:
 **Step 1 — Package the function:**
 
 ```bash
-zip ebs-cleanup.zip s3-lambda-function.py
+zip ebs-cleanup.zip stale-ebs-snapshots.py
 ```
 
 **Step 2 — Create the Lambda function:**
@@ -117,7 +117,7 @@ zip ebs-cleanup.zip s3-lambda-function.py
 aws lambda create-function \
   --function-name ebs-snapshot-cleanup \
   --runtime python3.11 \
-  --handler s3-lambda-function.lambda_handler \
+  --handler stale-ebs-snapshots.lambda_handler \
   --role arn:aws:iam::YOUR_ACCOUNT_ID:role/ebs-cleanup-role \
   --zip-file fileb://ebs-cleanup.zip \
   --timeout 300 \
@@ -128,7 +128,7 @@ aws lambda create-function \
 **Step 3 — Update the function (after changes):**
 
 ```bash
-zip ebs-cleanup.zip s3-lambda-function.py
+zip ebs-cleanup.zip stale-ebs-snapshots.py
 
 aws lambda update-function-code \
   --function-name ebs-snapshot-cleanup \
