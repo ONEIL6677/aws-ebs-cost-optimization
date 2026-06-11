@@ -1,7 +1,7 @@
-# AWS EBS Snapshot Cleanup — Lambda Function
+# AWS EBS Snapshot Cleanup Lambda Function
 
 An AWS Lambda function that automatically identifies and deletes **stale EBS snapshots**
-to reduce unnecessary storage costs — keeping only snapshots tied to active,
+to reduce unnecessary storage costs keeping only snapshots tied to active,
 running EC2 instances.
 
 ---
@@ -24,7 +24,7 @@ running EC2 instances.
 ## Overview
 
 EBS snapshots are incremental backups of EC2 volumes. Over time, snapshots can
-accumulate from deleted volumes, stopped instances, or old infrastructure — silently
+accumulate from deleted volumes, stopped instances, or old infrastructure silently
 adding to your AWS bill. This Lambda function automates the cleanup process by
 scanning all snapshots in your account and safely deleting the ones that are no
 longer needed.
@@ -278,7 +278,7 @@ Summary — Deleted: 4 snapshot(s) | Skipped: 43 snapshot(s).
 
 ## Security Notes
 
-- The IAM policy uses `"Resource": "*"` for EC2 actions — consider scoping to a
+- The IAM policy uses `"Resource": "*"` for EC2 actions consider scoping to a
   specific region or account if operating in a multi-account environment
 - **Always test in a non-production account first** before running in production
 - Enable **AWS CloudTrail** to audit all `DeleteSnapshot` API calls made by this function
